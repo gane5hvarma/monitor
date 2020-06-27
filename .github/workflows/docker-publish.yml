@@ -48,7 +48,7 @@ jobs:
   
   deploy:
     runs-on: ubuntu-latest
-    needs: [push]
+    needs: [push, get-latest-tag]
     steps:
       - uses: actions/checkout@v2
 
