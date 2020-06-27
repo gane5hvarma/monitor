@@ -42,10 +42,7 @@ jobs:
         run: docker build . --file Dockerfile --tag gane5h/monitor:${{ needs.get-latest-tag.outputs.tag}}
         
       - name: Log into registry
-        env:
-          DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
-          DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSSWORD}}
-        run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login docker.io -u gane5h --password-stdin 
+        run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login docker.io -u "${{secrets.DOCKERHUB_USERNAME}}" --password-stdin 
 
       - name: Push image
         run: |
