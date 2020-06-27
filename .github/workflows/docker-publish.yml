@@ -57,7 +57,7 @@ jobs:
 #           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #           aws-region: us-east-1
       - name: Create file
-        run: echo $({{ga}} | sed "s/{{MYVARNAME}}/ganesh/g")
+        run: echo '$(echo "{{ga}}" | sed "s/{{MYVARNAME}}/ganesh/g")'
         
           
 #       - name: Trigger deploy
