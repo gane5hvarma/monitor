@@ -39,14 +39,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build image
-        run: docker build . --file Dockerfile --tag rudder-monitor:${{ needs.get-latest-tag.outputs.tag}}
+        run: docker build . --file Dockerfile --tag gane5h/monitor:${{ needs.get-latest-tag.outputs.tag}}
         
       - name: Log into registry
         env:
           DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
           DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSSWORD}}
-        run: docker login docker.io -u gane5h --password Gan@591997
+        run: echo "$DOCKERHUB_PASSWORD" | docker login docker.io -u gane5h --password-stdin 
 
       - name: Push image
         run: |
-          docker push rudder-monitor:${{ needs.get-latest-tag.outputs.tag}}
+          docker push gane5h/monitor:${{ needs.get-latest-tag.outputs.tag}}
