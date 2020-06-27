@@ -52,12 +52,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: us-east-1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       - name: echo tag
         run: echo "${{ needs.get-latest-tag.outputs.tag}}"
       - name: Create monitor.yaml from template file
@@ -69,10 +69,8 @@ jobs:
         run: cat monitor.yaml
           
       - name: test delpoy
-        uses: ianbelcher/eks-kubectl-action@master
+        uses: gane5hvarma/eks-iam-authenticate-kubectl
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: us-east-1
-          cluster_name: rudder-saas-cluster
-          args: get pods
+          args: apply -f monitor.yaml
