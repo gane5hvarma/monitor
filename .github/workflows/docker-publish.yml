@@ -18,7 +18,14 @@ env:
   IMAGE_NAME: monitor        
 
 jobs:
-  # Push image to GitHub Packages.
+
+  get-latest-tag:
+    steps:
+      - uses: actions/checkout@v1
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@master"     
+    # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     runs-on: ubuntu-latest
