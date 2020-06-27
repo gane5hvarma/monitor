@@ -25,7 +25,8 @@ jobs:
       - uses: actions/checkout@v1
       - name: 'Get Previous tag'
         id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@master"     
+        uses: "WyriHaximus/github-action-get-previous-tag@master"  
+           
     # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
@@ -38,6 +39,8 @@ jobs:
         run: docker build . --file Dockerfile --tag gane5h/monitor
       - name: echo actor
         run: echo ${{github.actor}}
+      - name: echo tag
+        run: echo $tag
         
       - name: Log into registry
         run: docker login docker.io -u gane5h --password Gan@591997
