@@ -58,10 +58,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-  
+      - name: echo tag
+        run: echo "${{ needs.get-latest-tag.outputs.tag}}"
       - name: Create monitor.yaml from template file
         id: monitor-yaml
-        run: cat monitor.yaml.template | sed "s/{{tag}}/${{ needs.get-latest-tag.outputs.tag}}/g") > monitor.yaml
+        env:
+          tag: "${{ needs.get-latest-tag.outputs.tag}}"
+          run: cat monitor.yaml.template | sed "s/{{tag}}/$tag/g") > monitor.yaml
         
           
       - name: Trigger deploy
