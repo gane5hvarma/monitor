@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: rudderstack-monitor
+  name: ganesh-monitor
 spec:
   schedule: "*/1 * * * *"
   jobTemplate:
@@ -10,5 +10,5 @@ spec:
         spec:
           containers:
             - name: monitor
-              image: rudderlabs/test-mon:release-{{tag}}
+              image: gane5h/monitor:{{tag}}
           restartPolicy: OnFailure
