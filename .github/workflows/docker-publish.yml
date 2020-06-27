@@ -72,5 +72,5 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply monitor.yaml
+          args: apply -f monitor.yaml
 
