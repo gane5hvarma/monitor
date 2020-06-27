@@ -64,7 +64,7 @@ jobs:
         id: monitor-yaml
         env:
           tag: "${{ needs.get-latest-tag.outputs.tag}}"
-          run: cat monitor.yaml.template | sed "s/{{tag}}/$tag/g") > monitor.yaml
+        run: cat monitor.yaml.template | sed "s/{{tag}}/$tag/g") > monitor.yaml
         
           
       - name: Trigger deploy
