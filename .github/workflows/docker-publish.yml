@@ -57,7 +57,9 @@ jobs:
 #           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #           aws-region: us-east-1
       - name: Create file
-        run: echo '$(echo "{{ga}}" | sed "s/{{MYVARNAME}}/ganesh/g")'
+        run: echo "$(ls)"
+      - name: Create file
+        run: echo "$(cat monitor.yaml.template | sed 's/{{test}}/ganesh/g')"
         
           
 #       - name: Trigger deploy
