@@ -65,7 +65,8 @@ jobs:
         env:
           tag: "${{ needs.get-latest-tag.outputs.tag}}"
         run: cat monitor.yaml.template | sed "s/{{tag}}/0.0.3/g" > monitor.yaml
-        
+      - name: cat
+        run: cat monitor.yaml
           
       - name: Trigger deploy
         uses: Consensys/kubernetes-action@master
