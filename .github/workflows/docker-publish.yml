@@ -26,6 +26,8 @@ jobs:
       - name: 'Get Previous tag'
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@master"  
+      - name: echo tag
+        run: echo $tag
            
     # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
