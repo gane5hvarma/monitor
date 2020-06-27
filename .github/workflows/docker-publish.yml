@@ -40,13 +40,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build image
         run: docker build . --file Dockerfile --tag rudder-monitor:${{ needs.get-latest-tag.outputs.tag}}
-      - name: echo
-        run: echo ${{secrets.DOCKERHUB_USERNAME}}
-      - name: echoa
-        run: echo ${{secrets.DOCKERHUB_PASSWORD}}
         
       - name: Log into registry
-        run: docker login docker.io -u ${{secrets.DOCKERHUB_USERNAME}} --password ${{secrets.DOCKERHUB_PASSWORD}}
+        env:
+          DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
+          DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSSWORD}}
+        run: docker login docker.io -u "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
 
       - name: Push image
         run: |
