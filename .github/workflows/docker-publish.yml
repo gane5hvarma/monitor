@@ -36,4 +36,4 @@ jobs:
 
       - name: Push image
         run: |
-          docker push gane5hvarma/monitor:latest
+          docker push gane5h/monitor:latest
