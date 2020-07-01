@@ -56,7 +56,7 @@ jobs:
         id: monitor-yaml
         env:
           tag: "${{ needs.get-latest-tag.outputs.tag}}"
-        run: cat monitor.yaml.template | sed "s/{{tag}}/0.0.3/g" > monitor.yaml
+        run: cat monitor.yaml.template | sed "s/{{tag}}/{{ needs.get-latest-tag.outputs.tag}}/g" > monitor.yaml
       - name: cat
         run: cat monitor.yaml
           
