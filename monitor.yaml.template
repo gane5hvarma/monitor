@@ -11,4 +11,11 @@ spec:
           containers:
             - name: monitor
               image: gane5h/monitor:{{tag}}
+              volumeMounts:
+                - mountPath: /etc/urls
+                  name: customer-urls
           restartPolicy: OnFailure
+          volumes:
+            - name: customer-urls
+              configMap: customer-urls
+                  
