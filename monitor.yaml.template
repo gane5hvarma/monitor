@@ -17,5 +17,6 @@ spec:
           restartPolicy: OnFailure
           volumes:
             - name: customer-urls
-              configMap: customer-urls
-                  
+              configMap:
+                defaultMode: 420
+                name: customer-urls
