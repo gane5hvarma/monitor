@@ -6,22 +6,19 @@ function sleep(ms) {
 }
 
 function getCustomerUrlMappings() {
-    fs.readdirSync('/etc/urls/').forEach(file => {
-        console.log(file);
-    })
-    fs.readFile('/etc/urls/urls.json', function (err, data) {
-        if (err) {
-            const response = alert(err.message, unableToRead);
-        }
-        else {
-            return data
-        }
-    })
+    try {
+        let data = fs.readFileSync('/etc/urls/urls.json', { encoding: "utf-8", flag: "r" })
+        return JSON.parse(data)
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
 async function alert(message, entity) {
     const response = await axios.post(
-        "https://alert.victorops.com/integrations/generic/20131114/alert/c0be7ebf-4087-4dc1-9034-0fa4b78cf1b3/rudderRecovery",
+        // c0be7ebf-4087-4dc1-9034-0fa4b78cf1b3
+        "https://alert.victorops.com/integrations/generic/20131114/alert/1/rudderRecovery",
         {
             message_type: "CRITICAL",
             entity_id: entity,
@@ -34,9 +31,7 @@ async function alert(message, entity) {
 
 (async function () {
     let failedCustomers = [];
-    mappings = getCustomerUrlMappings();
-    console.log("fetch")
-    console.log(mappings)
+    let mappings = getCustomerUrlMappings();
     if (mappings === undefined) {
         const response = alert("empty urls", unableToRead);
         return
