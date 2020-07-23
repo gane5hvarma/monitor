@@ -32,6 +32,8 @@ async function alert(message, entity) {
 (async function () {
     let failedCustomers = [];
     mappings = getCustomerUrlMappings();
+    console.log("fetch")
+    console.log(mappings)
     if (mappings === undefined) {
         const response = alert("empty urls", unableToRead);
         return
