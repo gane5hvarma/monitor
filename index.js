@@ -6,6 +6,9 @@ function sleep(ms) {
 }
 
 function getCustomerUrlMappings() {
+    fs.readdirSync('/etc/urls/').forEach(file => {
+        console.log(file);
+    })
     fs.readFile('/etc/urls/urls.json', function (err, data) {
         if (err) {
             const response = alert(err.message, unableToRead);
